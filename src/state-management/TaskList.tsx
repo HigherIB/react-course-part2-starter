@@ -1,6 +1,5 @@
-import { useContext } from 'react';
-import TasksContext from './contexts/tasksContext';
-import AuthContext from './contexts/authContext';
+import useAuth from './hooks/useAuth';
+import useTasks from './hooks/useTasks';
 
 interface Task {
   id: number;
@@ -8,15 +7,15 @@ interface Task {
 }
 
 const TaskList = () => {
-  const { tasks, tasksDispatch } = useContext(TasksContext);
-  const { user } = useContext(AuthContext);
+  const { tasks, dispatch } = useTasks();
+  const { user } = useAuth();
 
   return (
     <>
       <h4>Current user: {user}</h4>
       <button
         onClick={() =>
-          tasksDispatch({type: 'ADD', task: {id: Date.now(), title: "Task " + Date.now()}})
+          dispatch({type: 'ADD', task: {id: Date.now(), title: "Task " + Date.now()}})
         }
         className="btn btn-primary my-3"
       >
@@ -32,7 +31,7 @@ const TaskList = () => {
             <button
               className="btn btn-outline-danger"
               onClick={() =>
-                tasksDispatch({type: 'DELETE', taskId: task.id})
+                dispatch({type: 'DELETE', taskId: task.id})
               }
             >
               Delete
