@@ -3,6 +3,7 @@ import LoginStatus from './LoginStatus';
 import TasksContext from './contexts/tasksContext';
 
 const NavBar = () => {
+  
   const { tasks } = useContext(TasksContext);
 
   return (
