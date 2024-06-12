@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import TasksContext from './contexts/tasksContext';
+import AuthContext from './contexts/authContext';
 
 interface Task {
   id: number;
@@ -8,9 +9,11 @@ interface Task {
 
 const TaskList = () => {
   const { tasks, tasksDispatch } = useContext(TasksContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <>
+      <h4>Current user: {user}</h4>
       <button
         onClick={() =>
           tasksDispatch({type: 'ADD', task: {id: Date.now(), title: "Task " + Date.now()}})
